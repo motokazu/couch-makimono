@@ -1,0 +1,75 @@
+/* add styles here */
+
+body {
+  font:1em Helvetica, sans-serif;
+  padding:4px;
+}
+
+h1 {
+  margin-top:0;
+}
+
+#account {
+  float:right;
+}
+
+/*
+ * Couch Makimono
+ */
+
+#navigator {
+	border:2px solid #edd;
+	background:#fee;
+	padding:1px;
+}
+
+#itembox {
+	border:2px solid #dde;
+	background:8px;
+	padding:1px;
+	width:20%;
+	float:left;
+}
+#indextab {
+	border:2px solid #ddf;
+	padding:1px;
+	width:79%;
+	float:right;
+}
+#editbox {
+	border:2px solid #ddf;
+	padding:1px;
+	width:79%;
+	float:right;
+}
+form {
+  padding:4px;
+  margin:6px;
+  background-color:#ddd;  
+}
+
+div.avatar {
+  padding:2px;
+  padding-bottom:0;
+  margin-right:4px;
+  float:left;
+  font-size:0.78em;
+  width : 60px;
+  height : 60px;
+  text-align: center;
+}
+
+div.avatar .name {
+  padding-top:2px;
+}
+
+div.avatar img {
+  margin:0 auto;
+  padding:0;
+  width : 40px;
+  height : 40px;
+}
+
+#items ul {
+  list-style: none;
+}
