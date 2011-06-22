@@ -19,4 +19,4 @@ couchapp_load([
 	"../markitup/sets/default/set.js"
 ]);
 
-var projectcode = "couchdoc";
+var projectcode = "";

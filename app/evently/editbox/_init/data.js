@@ -1,3 +1,3 @@
 function(data){
-	$$(this).projectcode = "couchdoc";
+	$$(this).projectcode = "";
 }

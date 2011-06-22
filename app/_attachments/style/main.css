@@ -73,3 +73,8 @@ div.avatar img {
 #items ul {
   list-style: none;
 }
+
+p.sidetitle {
+	border-style: none none double;
+	border-color: #eef;
+}

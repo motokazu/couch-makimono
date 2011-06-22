@@ -14,7 +14,7 @@
 	  $("#itembox").evently("itembox" , app);
 	  $("#editbox").evently("editbox", app);
 	  $("#indextab").evently("indextab" , app);
-      $.evently.connect("#itembox" , "#editbox" , ["readitem"]); 
+      $.evently.connect("#itembox" , "#editbox" , ["readitem", "createproject", "inproject"]); 
 	  $.evently.connect("#itembox" , "#indextab", ["addtab"]);
 	  $.evently.connect("#indextab", "#editbox" , ["readitem"]);
     });
