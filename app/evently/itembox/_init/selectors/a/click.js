@@ -4,6 +4,7 @@ function(){
 		$(this).trigger('createproject');
 	} else {
 		projectcode = pcode;
-		$(this).trigger('inproject');	
+		$(this).trigger('inproject');
+		$(this).trigger('editin');
 	}
 }

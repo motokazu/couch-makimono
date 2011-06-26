@@ -17,10 +17,39 @@ h1 {
  * Couch Makimono
  */
 
+#masthead{
+	height: 52px;
+	border-width: 10px;
+	-webkit-border-image: url(../img/bar0.png) 10;
+	-moz-border-image: url(../img/bar0.png) 10;
+	border-image: url(../img/bar0.png) 10;
+	margin: 25px 0 0;
+	position: relative;
+	z-index: 1000;
+}
+
+#logo {
+	display: block;
+	height: 51px;
+	background: url(../img/draft0-1-colored0.png) no-repeat;
+	text-indent: +60px;
+	overflow: hidden;
+	margin-top: 3px;
+	margin-left: 10px;
+}
+
+#sitetitle {
+	font-size : 23px;
+}
+
 #navigator {
-	border:2px solid #edd;
-	background:#fee;
+	/* border:2px solid #edd;
+	background:#fee; */
 	padding:1px;
+	height: 20px;
+	vertical-align: middle;	
+	font-size : 10px;
+	text-align: center;
 }
 
 #itembox {
@@ -36,12 +65,19 @@ h1 {
 	width:79%;
 	float:right;
 }
-#editbox {
-	border:2px solid #ddf;
+#edittab {
 	padding:1px;
 	width:79%;
-	float:right;
+	float:right;	
 }
+
+.markItUp .markItUpHeader {
+	background-color: #fff;
+}
+.markItUp {
+	width:800px;	
+}
+
 form {
   padding:4px;
   margin:6px;
@@ -77,4 +113,11 @@ div.avatar img {
 p.sidetitle {
 	border-style: none none double;
 	border-color: #eef;
+}
+
+.message {
+	font-weight: bold;
+}
+.error {
+	color: red;
 }

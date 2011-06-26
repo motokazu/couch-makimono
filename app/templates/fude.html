@@ -1,22 +1,27 @@
 {{>header}}
+  <div id="masthead">
+    <div id="account"></div>
+      <div id="sitetitle">
+	    <div id="logo">{{site_title}}</div>
+      </div>
+    </div>
+    <div id="profile"></div>
+    <div id="navigator"></div>
 	<div id="itembox"></div>
-	<div id="indextab"></div>
-	<div id="editbox"></div>
+	<div id="edittab"></div>
   </body>
-  <script src="../script/makimono.js"></script>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
       $("#account").evently("account", app);
 	  $("#profile").evently("profile", app);
       $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
 	  
-	  $$("#editbox").title = "{{title}}";
-	  $("#itembox").evently("itembox" , app);
-	  $("#editbox").evently("editbox", app);
-	  $("#indextab").evently("indextab" , app);
-      $.evently.connect("#itembox" , "#editbox" , ["readitem", "createproject", "inproject"]); 
-	  $.evently.connect("#itembox" , "#indextab", ["addtab"]);
-	  $.evently.connect("#indextab", "#editbox" , ["readitem"]);
+	  $("#itembox").evently("itembox", app);
+	  $("#navigator").evently("navigator", app);
+	  $("#edittab").evently("edittab", app);
+	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin", "createproject"]);
+	  $.evently.connect("#edittab" , "#itembox" , ["inproject"]);
+	  $.evently.connect("#edittab" , "#navigator", ["navimessage"]);
     });
   </script>
-</html>
+{{>footer}}

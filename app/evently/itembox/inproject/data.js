@@ -3,6 +3,7 @@ function(data) {
   return {
     titles : data.rows.map(function(r) {
       return (r.value) || {};
-    })
+    }),
+	project : projectcode
   }
 };
