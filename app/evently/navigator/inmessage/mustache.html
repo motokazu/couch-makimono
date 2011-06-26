@@ -1,0 +1,8 @@
+<span class="message" id="navimessage-p">{{message}}</span>
+<script type="text/javascript" charset="utf-8">
+	$("#navimessage-p").show( "highlight", {}, 500, function(){
+		setTimeout(function(){
+			$( "#navimessage-p").fadeOut();
+		}, 10000 );
+	});
+</script>

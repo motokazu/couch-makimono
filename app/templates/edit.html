@@ -1,0 +1,9 @@
+    <div id="edittable-{{id_pcode}}-{{id_title}}"></div>
+<script type="text/javascript" charset="utf-8">
+   $$("#edittable-{{id_pcode}}-{{id_title}}").title = "{{title}}";
+   $$("#edittable-{{id_pcode}}-{{id_title}}").projectcode  = "{{projectcode}}";
+   $.couch.app(function(app) {
+  	  $("#edittable-{{id_pcode}}-{{id_title}}").evently("edittable", app);
+	  $.evently.connect("#edittable-{{id_pcode}}-{{id_title}}" , "#navigator", ["navimessage"]);
+   });
+</script>

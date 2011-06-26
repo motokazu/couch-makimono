@@ -1,0 +1,13 @@
+<form>
+TITLE:<input type="text" name="title" value="{{title}}" size="50">
+<input class="submit-button" type="submit" name="post" size=60 value="Update"><br>
+<textarea name="editable" id="editablearea-{{id_pcode}}-{{id_title}}" rows="8" cols="40">{{textdata}}</textarea>
+create at {{at}} , edit by {{by}}
+<input type="hidden" name="created_at" value="{{at}}">
+<input type="hidden" name="_rev" value="{{rev}}">
+<input type="hidden" name="pcode" value="{{pcode}}">
+</form>
+<script type="text/javascript" charset="utf-8">
+  $("#editablearea-{{id_pcode}}-{{id_title}}").markItUp(mySettings);
+  $(".submit-button").button();
+</script>
