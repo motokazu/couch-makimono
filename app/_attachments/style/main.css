@@ -121,3 +121,7 @@ p.sidetitle {
 .error {
 	color: red;
 }
+
+input {
+	width: 300px;
+}

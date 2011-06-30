@@ -1,0 +1,23 @@
+{{>header}}
+<div id="masthead">
+  <div id="account"></div>
+    <div id="sitetitle">
+	    <div id="logo">{{site_title}}</div>
+    </div>
+  </div>
+  <div id="profile"></div>
+  <div id="navigator"></div>
+  <div id="projectbox"></div>
+  </body>
+  <script type="text/javascript" charset="utf-8">
+    $.couch.app(function(app) {
+      $("#account").evently("account", app);
+	  $("#profile").evently("profile", app);
+      $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
+	  
+	  $("#projectbox").evently("projectbox", app);
+	  $("#navigator").evently("navigator", app);
+	  $.evently.connect("#projectbox" , "#navigator", ["navimessage"]);
+    });
+  </script>
+{{>footer}}

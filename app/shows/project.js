@@ -9,5 +9,5 @@ function(doc, req) {
       site_title : this.couchapp.name,
     };
 
-  return mustache.to_html(ddoc.templates.fude, data, ddoc.templates.partials);
+  return mustache.to_html(ddoc.templates.project, data, ddoc.templates.partials);
 }
