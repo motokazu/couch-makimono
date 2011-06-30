@@ -1,12 +1,4 @@
 {{>header}}
-  <div id="masthead">
-    <div id="account"></div>
-      <div id="sitetitle">
-	    <div id="logo">{{site_title}}</div>
-      </div>
-    </div>
-    <div id="profile"></div>
-    <div id="navigator"></div>
 	<div id="itembox"></div>
 	<div id="edittab"></div>
   </body>
@@ -19,7 +11,7 @@
 	  $("#itembox").evently("itembox", app);
 	  $("#navigator").evently("navigator", app);
 	  $("#edittab").evently("edittab", app);
-	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin", "createproject"]);
+	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin", "newdoc"]);
 	  $.evently.connect("#edittab" , "#itembox" , ["inproject"]);
 	  $.evently.connect("#edittab" , "#navigator", ["navimessage"]);
     });

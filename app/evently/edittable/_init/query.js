@@ -1,8 +1,6 @@
 function() {
   var title = $$(this).title;
-  var pcode = $$(this).projectcode;
-
-  projectcode = pcode;
+  var pcode = projectcode;
 
   return {
     view : "items",

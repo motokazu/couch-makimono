@@ -1,8 +1,9 @@
 /* add styles here */
 
 body {
-  font:1em Helvetica, sans-serif;
-  padding:4px;
+	font:1em Helvetica, sans-serif;
+	padding: 0px;
+	margin: 0px;
 }
 
 h1 {
@@ -17,13 +18,34 @@ h1 {
  * Couch Makimono
  */
 
+#topbar {
+	width: 100%;
+	height: 30px;
+	background-color: #666;
+	color: #FFF;
+	border-bottom: solid 1px #555;
+	border-top: solid 1px #888;
+	font-style: bold;
+	font-size: 16px;
+}
+#topbar a {
+	color: #EEE;
+	text-decoration: none;
+}
+#topbar a:hover{
+	color: #FFF;
+}
+
 #masthead{
 	height: 52px;
-	border-width: 10px;
+	border-bottom: solid 2px #555;
+	/*
+	border-width: 20px;
 	-webkit-border-image: url(../img/bar0.png) 10;
 	-moz-border-image: url(../img/bar0.png) 10;
 	border-image: url(../img/bar0.png) 10;
-	margin: 25px 0 0;
+	*/
+	margin: 0;
 	position: relative;
 	z-index: 1000;
 }
@@ -81,7 +103,6 @@ h1 {
 form {
   padding:4px;
   margin:6px;
-  background-color:#ddd;  
 }
 
 div.avatar {
@@ -106,9 +127,21 @@ div.avatar img {
   height : 40px;
 }
 
-#items ul {
-  list-style: none;
+#projectitems {
+	padding: 5px;
 }
+#projectitems > li {
+	list-style-type : none;
+}
+#projectitems a {
+	color: #222;
+	text-decoration: none;
+}
+#projectitems a:hover {
+	color: #22E;
+	background-color: #FFF;
+}
+
 
 p.sidetitle {
 	border-style: none none double;
@@ -117,11 +150,23 @@ p.sidetitle {
 
 .message {
 	font-weight: bold;
+	color: #FFF;
+	background-color: #556b2f;
 }
 .error {
 	color: red;
 }
 
-input {
-	width: 300px;
+input[type="text"] {
+	width: 400px;
+	border: 1px solid #555;
+	padding: 3px;
+}
+/*
+.ui-tabs .ui-tabs-nav{
+	height: 30px;
+}*/
+.ui-tabs .ui-tabs-nav li{
+/*	height: 28px; */
+	font-size: 0.8em;
 }

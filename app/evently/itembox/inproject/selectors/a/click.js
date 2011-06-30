@@ -1,9 +1,8 @@
 function(){
 	var href = $(this).attr('href');
-	if ( "backtotop" == href.slice(1)) {
-		$(this).trigger('_init');
-		$("#edittab").trigger('_init');
+	if ( "new" == href.slice(1)) {
+		$(this).trigger('newdoc');
 	} else {
-		$(this).trigger('addtab', href );		
+		$(this).trigger('addtab', href );
 	}
 }

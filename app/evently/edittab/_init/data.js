@@ -3,5 +3,10 @@ function(data){
 	$$(this).title = "";
 	$$(this).tabbox = undefined;
 	$$(this).tabcounter = 1;
-	$$(this).projectcode = "";
+
+	projectcode = data.rows[0].value.name;
+	
+	return {
+		projectname : projectcode
+	}
 }
