@@ -15,10 +15,10 @@
 		cache: true,
 		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>"
 	});
-
+	
 	$( "#edittabs span.ui-icon-close" ).live( "click", function() {
 		var index = $( "li", _tabs ).index( $( this ).parent() );
 		_tabs.tabs( "remove", index );
 		$$("#edittab").idxtabs.splice(index,1);
-	});		
+	});
 </script>

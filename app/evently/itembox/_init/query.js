@@ -1,5 +1,5 @@
 function() {
   return {
-    view : "project"
+    view : "project-idxs"
   };
 };

@@ -1,9 +1,8 @@
 /* add styles here */
 
 body {
-	font:1em Helvetica, sans-serif;
-	padding: 0px;
-	margin: 0px;
+  font:1em Helvetica, sans-serif;
+  padding:4px;
 }
 
 h1 {
@@ -18,6 +17,7 @@ h1 {
  * Couch Makimono
  */
 
+<<<<<<< HEAD
 #topbar {
 	width: 100%;
 	background-color: #666;
@@ -40,16 +40,15 @@ h1 {
 	border-bottom: solid 1px #555;
 }
 
+=======
+>>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 #masthead{
 	height: 52px;
-	border-bottom: solid 2px #555;
-	/*
-	border-width: 20px;
+	border-width: 10px;
 	-webkit-border-image: url(../img/bar0.png) 10;
 	-moz-border-image: url(../img/bar0.png) 10;
 	border-image: url(../img/bar0.png) 10;
-	*/
-	margin: 0;
+	margin: 25px 0 0;
 	position: relative;
 	z-index: 1000;
 }
@@ -105,6 +104,7 @@ h1 {
 form {
   padding:4px;
   margin:6px;
+  background-color:#ddd;  
 }
 
 div.avatar {
@@ -129,12 +129,10 @@ div.avatar img {
   height : 40px;
 }
 
-#projectitems {
-	padding: 5px;
+#items ul {
+  list-style: none;
 }
-#projectitems > li {
-	list-style-type : none;
-}
+<<<<<<< HEAD
 #projectitems a {
 	color: #222;
 	text-decoration: none;
@@ -149,6 +147,8 @@ div.avatar img {
 	background-color: #666;
 	color: #FFF;
 }
+=======
+>>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 
 p.projectname {
 	border-style: none none double;
@@ -157,15 +157,19 @@ p.projectname {
 .message {
 	font-size: 1em;
 	font-weight: bold;
+<<<<<<< HEAD
 	color: #FFF;
 	padding: 3px;
 	background-color: #556b2f;
 	border: 1px solid #006400;
+=======
+>>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 }
 .error {
 	color: red;
 }
 
+<<<<<<< HEAD
 input[type="text"] {
 	width: 300px;
 	border: 1px solid #555;
@@ -181,4 +185,8 @@ input.create-newsrc[type="text"] {
 .ui-tabs .ui-tabs-nav li{
 /*	height: 28px; */
 	font-size: 0.8em;
+=======
+input {
+	width: 300px;
+>>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 }
