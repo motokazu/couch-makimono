@@ -17,7 +17,6 @@ h1 {
  * Couch Makimono
  */
 
-<<<<<<< HEAD
 #topbar {
 	width: 100%;
 	background-color: #666;
@@ -40,8 +39,6 @@ h1 {
 	border-bottom: solid 1px #555;
 }
 
-=======
->>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 #masthead{
 	height: 52px;
 	border-width: 10px;
@@ -132,7 +129,7 @@ div.avatar img {
 #items ul {
   list-style: none;
 }
-<<<<<<< HEAD
+
 #projectitems a {
 	color: #222;
 	text-decoration: none;
@@ -147,8 +144,6 @@ div.avatar img {
 	background-color: #666;
 	color: #FFF;
 }
-=======
->>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 
 p.projectname {
 	border-style: none none double;
@@ -157,19 +152,15 @@ p.projectname {
 .message {
 	font-size: 1em;
 	font-weight: bold;
-<<<<<<< HEAD
 	color: #FFF;
 	padding: 3px;
 	background-color: #556b2f;
 	border: 1px solid #006400;
-=======
->>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 }
 .error {
 	color: red;
 }
 
-<<<<<<< HEAD
 input[type="text"] {
 	width: 300px;
 	border: 1px solid #555;
@@ -185,8 +176,7 @@ input.create-newsrc[type="text"] {
 .ui-tabs .ui-tabs-nav li{
 /*	height: 28px; */
 	font-size: 0.8em;
-=======
+}
 input {
 	width: 300px;
->>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 }

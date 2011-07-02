@@ -4,8 +4,6 @@ function couchapp_load(scripts) {
   };
 };
 
-var projectcode = "";
-
 /* loads scripts */
 couchapp_load([
 	"/_utils/script/sha1.js",

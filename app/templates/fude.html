@@ -19,12 +19,8 @@
 	  $("#itembox").evently("itembox", app);
 	  $("#navigator").evently("navigator", app);
 	  $("#edittab").evently("edittab", app);
-<<<<<<< HEAD
 	  $("#topbar").evently("topbar", app);
 	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin"]);
-=======
-	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin", "createproject"]);
->>>>>>> parent of b407b13... change the design from multi project in one database to single. and update UI.
 	  $.evently.connect("#edittab" , "#itembox" , ["inproject"]);
 	  $.evently.connect("#edittab" , "#navigator", ["navimessage"]);
 	  $.evently.connect("#topbar" , "#navigator", ["navimessage"]);
