@@ -7,6 +7,8 @@ function(doc, req) {
       }),
       id : req.id,
       site_title : this.couchapp.name,
+      fude : "/makimono/_design/app/_show/fude",
+	  project: "/makimono/_design/app/_show/project"
     };
 
   return mustache.to_html(ddoc.templates.fude, data, ddoc.templates.partials);

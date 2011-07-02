@@ -1,8 +1,9 @@
 /* add styles here */
 
 body {
-  font:1em Helvetica, sans-serif;
-  padding:4px;
+	font:1em Helvetica, sans-serif;
+	padding: 0px;
+	margin: 0px;
 }
 
 h1 {
@@ -41,11 +42,14 @@ h1 {
 
 #masthead{
 	height: 52px;
-	border-width: 10px;
+	border-bottom: solid 2px #555;
+	/*
+	border-width: 20px;
 	-webkit-border-image: url(../img/bar0.png) 10;
 	-moz-border-image: url(../img/bar0.png) 10;
 	border-image: url(../img/bar0.png) 10;
-	margin: 25px 0 0;
+	*/
+	margin: 0;
 	position: relative;
 	z-index: 1000;
 }
@@ -101,7 +105,6 @@ h1 {
 form {
   padding:4px;
   margin:6px;
-  background-color:#ddd;  
 }
 
 div.avatar {
@@ -126,10 +129,12 @@ div.avatar img {
   height : 40px;
 }
 
-#items ul {
-  list-style: none;
+#projectitems {
+	padding: 5px;
 }
-
+#projectitems > li {
+	list-style-type : none;
+}
 #projectitems a {
 	color: #222;
 	text-decoration: none;
@@ -176,7 +181,4 @@ input.create-newsrc[type="text"] {
 .ui-tabs .ui-tabs-nav li{
 /*	height: 28px; */
 	font-size: 0.8em;
-}
-input {
-	width: 300px;
 }
