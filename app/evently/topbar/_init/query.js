@@ -1,5 +1,5 @@
 function() {
   return {
-    view : "project-items"
+    view : "project"
   };
 };

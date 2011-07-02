@@ -1,13 +1,18 @@
+<p class="projectname">project :: {{projectname}} opened.</p>
 <div id="edittabs">
 	<ul>
 		<li><a href="#tabs-0">Welcome</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>
 	</ul>
 	<div id="tabs-0">
-		<p>project :: {{projectname}} opened.</p>
+		<p>
+		Welcome {{projectname}} project. This is first page.
+		<br>If you want to close this window, click [x] button on the right-up of tab.
+		</p>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
 	var _tabs = $("#edittabs").tabs({
+		cache: true,
 		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>"
 	});
 

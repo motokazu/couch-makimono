@@ -1,6 +1,6 @@
 
-/* global val */
-var projectcode = "";
+/* global */
+var makimono_job_database = "makimono-jobs";
 
 $(function(){
 

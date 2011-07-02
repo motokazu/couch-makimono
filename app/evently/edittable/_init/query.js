@@ -1,9 +1,9 @@
 function() {
-  var title = $$(this).title;
-  var pcode = projectcode;
+	var title = $$(this).title;
+	var _id = $$(this).pathto;
 
-  return {
-    view : "items",
-    key : [pcode, title],
-  };
+	return {
+    	view : "items",
+    	key : _id,
+	};
 };

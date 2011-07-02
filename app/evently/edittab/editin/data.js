@@ -1,5 +1,5 @@
 function(data){
 	return {
-		projectname : projectcode
+		projectname : data.rows[0].value.name
 	}
 }

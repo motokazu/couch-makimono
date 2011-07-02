@@ -1,7 +1,26 @@
-<p class="sidetitle">items of <strong>{{project}}</strong></p>
 <ul id="projectitems">
 {{#titles}}
-  <li><a href="#{{title}}" title="{{_id}}">{{title}}</a><a href="#" class="deletedoc"><b>[X]</b></a></li>
+  <li><a href="#{{_id_encoded}}" title="{{_id}}">{{title}}</a><a href="#" class="deletedoc"><b>[X]</b></a></li>
 {{/titles}}
 </ul>
-<a href="#new"></span>New Document</a>
+<a class="create-newsrc"> +new+ </a>
+<div id="create-new-source">
+<form class="create-newsrc">
+	<label for="path">Path</label>
+	<select name="path">
+		<option value="/">/</option>
+	</select>
+	<br>
+	<label for="title">Source Name</label><br>
+	<input type="text" class="create-newsrc" name="title" value="">
+	<input type="submit" class="submit-button" value="Create">
+</form>
+</div>
+<script type="text/javascript" charset="utf-8">
+	$("#create-new-source").hide();
+	$(".submit-button").button();
+	
+	$("a.create-newsrc").click(function(){
+		$("#create-new-source").show();
+	});
+</script>

@@ -1,0 +1,44 @@
+<table border="0">
+	<tr valign="middle">
+		<td width="80"><a href="">Top</a></td>
+		<td width="80"><a href="#OpenProject">Project</a></td>
+	</tr>
+</table>
+
+<div id="projectmenu">
+	<div>
+		<h3>Project Information</h3>
+		<form class="proj-update">
+			<table border="0" cellspacing="0" cellpadding="1">
+				<tr><th>Field</th><th>Value</th></tr>
+				<tr><td>Project Name</td><td><input type="text" name="name" value="{{name}}"></td></tr>
+				<tr><td>Author</td><td><input type="text" name="author" value="{{author}}"></td></tr>
+				<tr><td>Version</td><td><input type="text" name="version" value="{{ver}}"></td></tr>
+				<tr><td>Copyright</td><td><input type="text" name="copyright" value="{{copy}}"></td></tr>
+			</table>
+			<input type="hidden" name="created_at" value="{{at}}">
+			<input type="hidden" name="_id" value="{{id}}">
+			<input type="submit" class="button" value="Update Project Information">
+		</form>
+		<h3>Job action</h3>
+		<form class="job-publish">
+			<input type="submit" class="button" value="Publish this project.">
+			<input type="hidden" name="_id" value="{{id}}">
+		</form>
+		<hr>
+		<input type="button" class="button" name="close-button" value="Close">
+	</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	$("#projectmenu").hide();
+	var topbarheight = $("#topbar").height();
+	$(function() {
+		$("a[href=#OpenProject]").click(function(){
+			$("#projectmenu").slideToggle();
+		});
+		$(".button").button();
+		$("input[name=close-button].button").click(function(){
+			$("#projectmenu").slideToggle();
+		});
+	});
+</script>

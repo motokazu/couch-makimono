@@ -1,9 +1,9 @@
-    <div id="edittable-{{id_pcode}}-{{id_title}}"></div>
+    <div id="edittable-{{path_id}}"></div>
 <script type="text/javascript" charset="utf-8">
-   $$("#edittable-{{id_pcode}}-{{id_title}}").title = "{{title}}";
-   $$("#edittable-{{id_pcode}}-{{id_title}}").projectcode  = "{{projectcode}}";
+   $$("#edittable-{{path_id}}").title = "{{title}}";
+   $$("#edittable-{{path_id}}").pathto = '{{id}}';
    $.couch.app(function(app) {
-  	  $("#edittable-{{id_pcode}}-{{id_title}}").evently("edittable", app);
-	  $.evently.connect("#edittable-{{id_pcode}}-{{id_title}}" , "#navigator", ["navimessage"]);
+  	  $("#edittable-{{path_id}}").evently("edittable", app);
+	  $.evently.connect("#edittable-{{path_id}}" , "#navigator", ["navimessage"]);
    });
 </script>

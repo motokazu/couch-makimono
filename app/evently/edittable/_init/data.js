@@ -5,13 +5,13 @@ function(view) {
 	}
 
 	return {
-    	title : view.rows[0].value.title,
-    	textdata : view.rows[0].value.editable,
-		at : view.rows[0].value.created_at,
-		by : view.rows[0].value.edit_by[0] || "somebody",
+		id : view.rows[0].value._id,
 		rev : view.rows[0].value._rev,
-		pcode : projectcode,
-		id_title : splitforid(view.rows[0].value.title), // remove slash
-		id_pcode : splitforid(projectcode) //remove slash
+    	title : view.rows[0].value.title,
+    	sourcedata : view.rows[0].value.source,
+		created_at : view.rows[0].value.created_at,
+		updated_at : view.rows[0].value.updated_at,
+		by : view.rows[0].value.edit_by.name || "somebody",
+		path_id : splitforid(view.rows[0].value._id) // remove slash
 	}
 };
