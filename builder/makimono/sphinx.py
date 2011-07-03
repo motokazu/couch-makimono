@@ -26,7 +26,7 @@ MAKE_TEMPLATE = """
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 PAPER         =
-BUILDDIR      = build
+BUILDDIR      = build/_attachments
 
 # Internal variables.
 PAPEROPT_a4     = -D latex_paper_size=a4
@@ -46,72 +46,117 @@ epub:
 	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 """
-
-BUILD_DIRECTORY = '/tmp'
+import os, sys
+import shutil
+from traceback import format_exception
+from makimono.util import datetime_str
+from couchdbkit import Database
+from couchdbkit.designer.fs import FSDoc
 
 class Publisher(object):
-    def __init__(self, doc):
-        self._doc = doc
-        self._root = os.path.join(BUILD_DIRECTORY, doc['_id'], doc['_rev'])
+    def __init__(self, db, doc, workdir = '/tmp'):
+        self._job_db = db
+        self._job_doc = doc
+        self._project_db = Database(uri = os.path.join(db.server_uri , doc['args']['database']))
+        self._root = os.path.join(workdir, doc['args']['database'], doc['_id'])
 
     def publish(self):
-        self._deploy_fs()
-        self._build()
-        doc = self._make_document()
-        self._cleanup()
-        return doc
+        self._lock_job()
+        try:
+            self._deploy_fs()
+            self._build()
+            self._store_result()
+            self._cleanup()
+        except:
+            self._mark_failed()
+            raise
+
+    def _lock_job(self):
+        db = self._job_db
+        doc = self._job_doc
+        doc['status'] = 'processing'
+        doc['updated_at'] = datetime_str()
+        db.save_doc(doc)
+        
+    def _mark_failed(self):
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+        db = self._job_db
+        doc = self._job_doc
+        doc['status'] = 'failed'
+        doc['error'] = exc_value.__repr__()
+        doc['trace'] = format_exception(exc_type, exc_value, exc_traceback)
+        doc['updated_at'] = datetime_str()
+        db.save_doc(doc)
+
 
     def _generate_makefile(self):
         return MAKE_TEMPLATE
 
-    def _generate_conf(self):
-        doc = self._doc
+    def _generate_conf(self, project_doc):
+        sphinx_attrs = project_doc.get('sphinx', {}) or {}
         properties = {}
-        properties['extensions'] = doc.get('extensions', [])
-        properties['project_name'] = doc.get('name')
-        properties['copyright'] = doc.get('copyright', '')
-        properties['version'] = doc.get('version', '1.0.0')
-        properties['release'] = doc.get('_rev')
-        properties['author']  = doc.get('author', '')
-        properties['publisher']  = doc.get('publisher', 'Couch-Makimono')
+        properties['project_name'] = project_doc.get('name')
+        properties['release'] = project_doc.get('_rev')
+        properties['extensions'] = sphinx_attrs.get('extensions', [])
+        properties['copyright'] = sphinx_attrs.get('copyright', '')
+        properties['version'] = sphinx_attrs.get('version', '1.0.0')
+        properties['author']  = sphinx_attrs.get('author', '')
+        properties['publisher']  = sphinx_attrs.get('publisher', 'Couch-Makimono')
         return CONF_TEMPLATE % properties
-
 
     def _deploy_fs(self):
         root = self._root
-        doc = self._doc
-        source_dir = os.path.join(root, 'source')
+        project_db = self._project_db
 
+        source_dir = os.path.join(root, 'source')
         # create directory with template
         if not os.path.exists(source_dir):
-            os.makedirs(os.path.join(source_dir))        
+            os.makedirs(os.path.join(source_dir))
+            os.makedirs(os.path.join(source_dir, '_static'))
+
         with open(os.path.join(root, 'Makefile'), 'w') as f:
             f.write(self._generate_makefile())
-        with open(os.path.join(source_dir, 'conf.py'), 'w') as f:
-            f.write(self._generate_conf())
+
+        # TODO: use efficient view
+        for doc in project_db.all_docs(include_docs=True):
+            doc = doc['doc']
+            t = doc.get('type', None)
+            if t == 'project':
+                print doc
+                with open(os.path.join(source_dir, 'conf.py'), 'w') as f:
+                    f.write(self._generate_conf(doc))
+            elif t == 'item':
+                print doc
+                filepath = doc['_id']
+                # source
+                with open(os.path.join(source_dir, filepath), 'w') as f:
+                    f.write(doc['source'])
+                # TODO: attachements
+            else:
+                # unknown doc or design doc
+                pass
             
-        # TODO: deploy all contents to the file system.
-        pass
-
-
     def _build(self):
         root = self._root
-        doc = self._doc
         command = "make html"
         proc = Popen(command, shell = True, cwd = root, stdout = PIPE)
         stdout, stderr = proc.communicate()
         return (proc.returncode, stdout, stderr)
 
-    def _make_document(self):
-        doc = {
-            "type": "publish",
-            }
-        # TODO: collect contents as attachment
-        return doc
+    def _store_result(self):
+        root = self._root
+        project_db = self._project_db
+        # TODO: maybe heavy bottlenecks, fix me for performance tu
+        doc = FSDoc(os.path.join(root, 'build'), is_ddoc=False).doc(project_db)
+        now = datetime_str()
+        doc['created_at'] = now
+        doc['updated_at'] = now
+        doc['type'] = 'build'
+        project_db.save_doc(doc, force_update=True)
 
     def _cleanup(self):
-        # TODO: cleanup deployed contents to reduce disk usage.
-        pass
+        root = self._root
+        shutil.rmtree(root)
 
 # adhoc testing, 
 if __name__ == "__main__":
