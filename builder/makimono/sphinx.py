@@ -67,6 +67,7 @@ class Publisher(object):
             self._build()
             self._store_result()
             self._cleanup()
+            self._mark_success()
         except:
             self._mark_failed()
             raise
@@ -75,6 +76,13 @@ class Publisher(object):
         db = self._job_db
         doc = self._job_doc
         doc['status'] = 'processing'
+        doc['updated_at'] = datetime_str()
+        db.save_doc(doc)
+
+    def _mark_success(self):
+        db = self._job_db
+        doc = self._job_doc
+        doc['status'] = 'success'
         doc['updated_at'] = datetime_str()
         db.save_doc(doc)
         
