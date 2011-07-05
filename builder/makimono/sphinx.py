@@ -104,7 +104,7 @@ class Publisher(object):
         sphinx_attrs = project_doc.get('sphinx', {}) or {}
         properties = {}
         properties['project_name'] = project_doc.get('name')
-        properties['release'] = project_doc.get('_rev')
+        properties['release'] = project_doc.get('_rev').split('-')[0]
         properties['extensions'] = sphinx_attrs.get('extensions', [])
         properties['copyright'] = sphinx_attrs.get('copyright', '')
         properties['version'] = sphinx_attrs.get('version', '1.0.0')
@@ -130,11 +130,9 @@ class Publisher(object):
             doc = doc['doc']
             t = doc.get('type', None)
             if t == 'project':
-                print doc
                 with open(os.path.join(source_dir, 'conf.py'), 'w') as f:
                     f.write(self._generate_conf(doc))
             elif t == 'item':
-                print doc
                 filepath = doc['_id']
                 # source
                 with open(os.path.join(source_dir, filepath), 'w') as f:
@@ -160,7 +158,7 @@ class Publisher(object):
         doc['created_at'] = now
         doc['updated_at'] = now
         doc['type'] = 'build'
-        project_db.save_doc(doc, force_update=True)
+        project_db.save_doc(doc, encode_attachments=False, force_update=True)
 
     def _cleanup(self):
         root = self._root
