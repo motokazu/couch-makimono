@@ -1,14 +1,28 @@
-<ul id="projectitems">
-{{#titles}}
-  <li><a href="#{{_id_encoded}}" title="{{_id}}">{{title}}</a><a href="#" class="deletedoc"><b>[X]</b></a></li>
-{{/titles}}
-</ul>
-<span class="create-newsrc"> +new+ </span>
+<table id="projectitems" border="0" cellspacing="0" cellpadding="0" width="100%">
+	<th><td colspan="3"><u>project items</u></td></th>
+	{{#paths}}
+	<tr class="itemdirpath"><td colspan="3">
+		<span class="ui-icon ui-icon-folder-collapsed"></span>{{path}}</td>
+	</tr>
+	{{#items}}
+	<tr class="itemarea">
+		<td>&nbsp;</td>
+		<td><span class="ui-icon ui-icon-document"></span>
+			<a class="openitem" href="#{{_id_encoded}}" title="{{_id}}">{{title}}</td>
+		<td align="right"><a href="#{{_id_encoded}}" class="deleteitem">
+			<span class="ui-icon ui-icon-trash"></span></a></td>
+	</tr>
+	{{/items}}
+	{{/paths}}
+</table>
+<span class="create-newsrc"><span class="ui-icon ui-icon-plusthick"></span>new</span>
 <div id="create-new-source">
 <form class="create-newsrc">
 	<label for="path">Path</label>
 	<select name="path">
-		<option value="/">/</option>
+		{{#paths}}
+		<option value="{{path}}">{{path}}</option>
+		{{/paths}}
 	</select>
 	<br>
 	<label for="title">Source Name</label><br>
@@ -19,8 +33,9 @@
 <script type="text/javascript" charset="utf-8">
 	$("#create-new-source").hide();
 	$(".submit-button").button();
-	
-	$("a.create-newsrc").click(function(){
-		$("#create-new-source").show();
+	$("tr.itemarea").mouseover(function(){
+		$(this).css("background-color", "#f0f8ff");
+	}).mouseout(function(){
+		$(this).css("background-color", "#FFF");
 	});
 </script>

@@ -5,7 +5,7 @@ function(doc, req) {
       ddoc : JSON.stringify(require("vendor/couchapp/lib/code").ddoc(ddoc), function(key, value) {
         return (key == "parent") ? undefined : value;
       }),
-      id : req.id,
+      id : req.query.id,
       site_title : this.couchapp.name,
       fude : "/makimono/_design/app/_show/fude",
 	  project: "/makimono/_design/app/_show/project"

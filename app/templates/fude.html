@@ -12,7 +12,7 @@
 	  $("#navigator").evently("navigator", app);
 	  $("#edittab").evently("edittab", app);
 	  $("#topbar").evently("topbar", app);
-	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "editin"]);
+	  $.evently.connect("#itembox" , "#edittab" , ["addtab", "deltab", "editin"]);
 	  $.evently.connect("#edittab" , "#itembox" , ["inproject"]);
 	  $.evently.connect("#edittab" , "#navigator", ["navimessage"]);
 	  $.evently.connect("#topbar" , "#navigator", ["navimessage"]);

@@ -1,6 +1,4 @@
 function(data) {
-	
-	
 	return {
 		id   : data.rows[0].value._id,
 		name : data.rows[0].value.name,

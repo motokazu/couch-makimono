@@ -85,6 +85,19 @@ h1 {
 	width:20%;
 	float:left;
 }
+#projectitems a{
+	text-decoration: none;
+}
+a.deleteitem :hover {
+	color: #E00;
+}
+#projectitems tr.itemdirpath {
+	background-color: #e6e6fa;
+}
+.ui-icon {
+	float: left;
+}
+
 #indextab {
 	border:2px solid #ddf;
 	padding:1px;
@@ -97,9 +110,24 @@ h1 {
 	float:right;	
 }
 
+#upload-dialog {
+	font-size: 0.8em;
+}
+
+.markItUp {
+	/* width: 100%;
+	edit markitup/skins/simple/style.css
+	*/
+}
 .markItUp .markItUpHeader {
 	background-color: #fff;
 	font-size: 1.0em;
+}
+.markItUpEditor{
+	font-size: 0.8em;
+}
+.edittable-area { 
+	font-size: 0.8em;
 }
 
 form {
@@ -146,8 +174,7 @@ div.avatar img {
 
 #create-new-source {
 	font-size: 0.8em;
-	background-color: #666;
-	color: #FFF;
+	background-color: #e6e6fa;
 }
 
 p.projectname {
@@ -164,6 +191,9 @@ p.projectname {
 }
 .error {
 	color: red;
+}
+.table-header{
+	background-color: #e6e6fa;
 }
 
 input[type="text"] {

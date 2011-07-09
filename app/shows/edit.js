@@ -1,8 +1,5 @@
 function(doc, req) {
-	
-	function splitforid(str){
-		return str.split('/').join('').split('.').join('').replace(/ /g,'');
-	}
+	// !code lib/makimono.js
 	
 	var ddoc = this,
     	mustache = require("vendor/couchapp/lib/mustache"),

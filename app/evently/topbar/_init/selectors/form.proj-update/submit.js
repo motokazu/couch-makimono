@@ -8,17 +8,27 @@ function() {
 		return false;
 	}
 	
-	fdoc.type = "project";
-	fdoc.updated_at = new Date();
-	fdoc.edit_by = $$("#profile").profile || {};
-	
+	var updoc = {
+		_id : fdoc._id,
+		created_at : fdoc.created_at,
+		updated_at : fdoc.updated_at,
+		type : "project",
+		name : fdoc.name,
+		edit_by : $$("#profile").profile || {},
+		sphinx_attr:{
+			"author" : fdoc.author,
+			"version": fdoc.version,
+			"copyright": fdoc.copyright
+		}
+	};
+
 	// get original _rev and update
-	app.db.openDoc(fdoc._id, {
+	app.db.openDoc(updoc._id, {
 		success : function(doc) {
-			fdoc._rev = doc._rev;
-	        app.db.saveDoc(fdoc, {
+			updoc._rev = doc._rev;
+	        app.db.saveDoc(updoc, {
 				success:function(){
-					form.trigger('navimessage', 'submit successfully. project name is ' + fdoc.name);
+					form.trigger('navimessage', 'submit successfully. project name is ' + updoc.name);
 				}
 			});
 		}

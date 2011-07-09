@@ -1,13 +1,40 @@
-<form>
+
+<form id="editform">
 <input type="text" name="title" value="{{title}}" size="50">
-<input class="submit-button" type="submit" name="post" size=60 value="Update"><br>
-<textarea name="source" id="source-{{path_id}}" rows="8" cols="40">{{sourcedata}}</textarea>
+<input class="submit-button" type="submit" name="post" size="60" value="Update">
+<br>
+<textarea name="source" id="source-{{path_id}}">{{sourcedata}}</textarea>
+<span class="ui-icon ui-icon-newwin"></span>
+ <input class="submit-button" type="button" name="preview" size="60" value="Preview">
+<hr>
 updated at {{updated_at}}, created at {{created_at}} , edit by {{by}}
 <input type="hidden" name="created_at" value="{{created_at}}">
 <input type="hidden" name="_id" value="{{id}}">
-<input type="hidden" name="_rev" value="{{rev}}">
 </form>
+
+<span class="ui-icon ui-icon-image"></span><h3>Attachments</h3>
+<table id="attachments-form" border="1" cellspacing="0" cellpadding="0" width="100%">
+	<tr class="table-header">
+		<th>Filename</th>
+		<th>content_type</th>
+		<th>action</th>
+	</tr>
+	{{#attachments}}
+	<tr class="attachmentarea">
+		<td>{{name}}</td>
+		<td>{{ctype}}</td>
+		<td><span class="ui-icon ui-icon-trash"></span></td>
+	</tr>
+	{{/attachments}}
+</table>
+<form action="" method="post" id="upload-form">
+	<input type="hidden" name="_id" value="{{id}}">
+	<input type="hidden" name="_rev" value="{{rev}}">
+	<input class="submit-button" type="submit" value="Upload">
+	<input type="file" name="_attachments" size="50">
+</form>
+
 <script type="text/javascript" charset="utf-8">
-  $("#source-{{path_id}}").markItUp(mySettings);
-  $(".submit-button").button();
+	$("#source-{{path_id}}").markItUp(mySettings);
+	$(".submit-button").button();
 </script>

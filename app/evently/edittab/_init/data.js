@@ -1,5 +1,5 @@
 function(data){
-    $$(this).idxtabs = [{"title":"Welcome","counter":0}];
+    $$(this).idxtabs = [{"title":"Welcome","index":"welcome"}];
 	$$(this).title = "";
 	$$(this).tabbox = undefined;
 	$$(this).tabcounter = 1;
