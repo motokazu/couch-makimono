@@ -46,13 +46,9 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
-	@echo
-	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 """
 import os, sys
@@ -73,7 +69,8 @@ class Publisher(object):
         self._lock_job()
         try:
             self._deploy_fs()
-            self._build()
+            self._build('html')
+            self._build('epub')
             self._store_result()
             self._cleanup()
             self._mark_success()
@@ -145,15 +142,15 @@ class Publisher(object):
                 filepath = doc['_id']
                 # source
                 with open(os.path.join(source_dir, filepath), 'w') as f:
-                    f.write(doc['source'])
+                    f.write(doc['source'].encode('utf-8'))
                 # TODO: attachements
             else:
                 # unknown doc or design doc
                 pass
-            
-    def _build(self):
+
+    def _build(self, t):
         root = self._root
-        command = "make html"
+        command = "make %s" % t
         proc = Popen(command, shell = True, cwd = root, stdout = PIPE)
         stdout, stderr = proc.communicate()
         return (proc.returncode, stdout, stderr)
