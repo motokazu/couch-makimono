@@ -1,5 +1,14 @@
-''' Sphinx Helper library
-'''
+# -*- coding: utf-8 -*-
+"""
+
+     Makimono project sphinx helper library
+     ================================================================
+
+     :copyright: Copyright 2011 by Yohei Sasaki <yssk22@gmail.com>
+     :license: MIT license
+
+"""
+
 import sys, os
 from subprocess import Popen, PIPE
 
