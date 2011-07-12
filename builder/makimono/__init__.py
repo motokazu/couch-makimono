@@ -9,7 +9,6 @@ config = {
 }
 
 def __load_rc_files(path):
-    print path
     if os.path.exists(path):
         with open(path, 'r') as f:
             obj = json.loads(f.read())
