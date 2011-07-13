@@ -150,7 +150,7 @@ class Publisher(object):
                     filepath = os.path.join(source_dir, filepath[1:])
                 else:
                     filepath = os.path.join(source_dir, filepath)
-                with open(filepath, 'w') as f:
+                with open("%s.rst" % filepath, 'w') as f:
                     f.write(doc['source'].encode('utf-8'))
                 # TODO: attachements
             else:
