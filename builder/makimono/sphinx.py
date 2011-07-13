@@ -63,7 +63,10 @@ class Publisher(object):
         self._job_db = db
         self._job_doc = doc
         self._project_db = Database(uri = os.path.join(db.server_uri , doc['args']['database']))
-        self._root = os.path.join(workdir, doc['args']['database'], doc['_id'])
+        if doc['_id'][0] == '/':
+            self._root = os.path.join(workdir, doc['args']['database'], doc['_id'][1:])
+        else:
+            self._root = os.path.join(workdir, doc['args']['database'], doc['_id'])
 
     def publish(self):
         self._lock_job()
@@ -140,8 +143,14 @@ class Publisher(object):
                     f.write(self._generate_conf(doc))
             elif t == 'item':
                 filepath = doc['_id']
+                if not util.is_valid_item_id(filepath):
+                    raise Exception('invalid _id')
                 # source
-                with open(os.path.join(source_dir, filepath), 'w') as f:
+                if filepath[0] == '/':
+                    filepath = os.path.join(source_dir, filepath[1:])
+                else:
+                    filepath = os.path.join(source_dir, filepath)
+                with open(filepath, 'w') as f:
                     f.write(doc['source'].encode('utf-8'))
                 # TODO: attachements
             else:
