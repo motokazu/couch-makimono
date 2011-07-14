@@ -1,5 +1,6 @@
 /* global */
 var makimono_job_database = "makimono-jobs";
+var jobstatus_update_interval = 5000;
 
 $(function(){
 
@@ -28,7 +29,7 @@ function getidx(ar, pathto){
 }
 
 function basename(path){
-	return path.replace(/\\/g,'/').replace(/.*\/|\.[^.]*$/g, '');
+	return path.replace(/\\/g,'/').replace(/\/?.*\//g, '');
 }
 function dirname(path) {
 	return path.replace(/\\/g,'/').replace(/[^\/]*$/, '');

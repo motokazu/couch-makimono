@@ -6,9 +6,7 @@ function(doc, req) {
         return (key == "parent") ? undefined : value;
       }),
       id : req.query.id,
-      site_title : this.couchapp.name,
-      fude : "/makimono/_design/app/_show/fude",
-	  project: "/makimono/_design/app/_show/project"
+      site_title : ddoc.couchapp.name
     };
 
   return mustache.to_html(ddoc.templates.fude, data, ddoc.templates.partials);

@@ -1,6 +1,6 @@
 <table border="0">
 	<tr valign="middle">
-		<td width="80"><a href="">Top</a></td>
+		<td width="80"><a href="#OpenTop">Top</a></td>
 		<td width="80"><a href="#OpenProject">Project</a></td>
 	</tr>
 </table>
@@ -23,6 +23,11 @@
 		<h3>Job action</h3>
 		<form class="job-publish">
 			<input type="submit" class="button" value="Publish this project.">
+			<div id="job-status-area">
+				<img src="../img/spinner.gif">
+				<strong><span id="job-status"></span></strong>
+				<span id="job-updated_at"></span>				
+			</div>
 			<input type="hidden" name="_id" value="{{id}}">
 		</form>
 		<hr>
@@ -31,6 +36,7 @@
 </div>
 <script type="text/javascript" charset="utf-8">
 	$("#projectmenu").hide();
+	$("#job-status-area > img").hide();
 	var topbarheight = $("#topbar").height();
 	$(function() {
 		$("a[href=#OpenProject]").click(function(){
@@ -41,4 +47,34 @@
 			$("#projectmenu").slideToggle();
 		});
 	});
+	
+	function startJobStatusCheck(){
+    	$.couch.app(function(app) {
+			var jobid = "job-publish-"+app.db.name;
+			var jobdb = $.couch.db(makimono_job_database);
+			$("#job-status-area > img").show();
+			
+			var statuscheck = setInterval(function(){
+				jobdb.openDoc(jobid, {
+					success: function(job, e){
+						if ( job.status == "success" || job.status == "failed" ){
+							$("#job-status-area > img").hide();
+							clearInterval(statuscheck);
+						}
+						$("#job-updated_at").text("at " + job.updated_at);
+						$("#job-status").text("Job Status: " + job.status);
+					},
+					error: function(){
+						if (updatetimer != null ){
+							clearInterval(statuscheck);
+						}
+					}
+				})
+				},jobstatus_update_interval
+			);
+		});
+	}
+	
+	// start job status check
+	startJobStatusCheck();
 </script>

@@ -21,13 +21,28 @@ function() {
 	
 	jobdb.openDoc(job._id, {
 		success: function(oldjob, e){
-			form.trigger('navimessage', 'already published. publish is submitted at '+oldjob.created_at );
+			// if status equal "success" or "failed", then allow to submit new job
+			if(oldjob.status == "success" || oldjob.status == "failed" ){
+				job._rev = oldjob._rev;
+				// submit new job
+				jobdb.saveDoc(job, {
+					success:function(){
+						form.trigger('navimessage', 'submit successfully. job id is ' + job._id + ' , created at ' + created_at );
+						// draw spinner
+						startJobStatusCheck();
+					}
+				});				
+			} else {
+				form.trigger('navimessage', 'already published. publish is submitted at '+oldjob.created_at );				
+			}
 		},
 		error: function(){
 			// submit new job
 			jobdb.saveDoc(job, {
 				success:function(){
 					form.trigger('navimessage', 'submit successfully. job id is ' + job._id + ' , created at ' + created_at );
+					// draw spinner
+					startJobStatusCheck();
 				}
 			});
 		}

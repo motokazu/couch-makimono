@@ -2,7 +2,7 @@ function(data) {
   	// $.log(data)
 	
 	// create paths from titles
-	var _paths = [{"path":"", "items":[]}];
+	var _paths = [{"path":"/", "items":[]}];
 	
 	jQuery.each(data.rows, function(){
 		var val = this.value;

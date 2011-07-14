@@ -5,18 +5,13 @@ function() {
 	
 	// commit new document
 	var doc = {};
-
-	function basename(path){
-		return path.replace(/.*\/|\.[^.]*$/g, '');
-	}
 	
 	doc.title = basename(fdoc.title);
 	
 	if ( doc.title == "" ) {
-		form.trigger('navimessage', 'Source Name is required.');
+		alert('Source Name is required.');
 		return false;
 	}
-
 	
 	doc.type = "item";	
 	doc.created_at = new Date();
@@ -24,7 +19,7 @@ function() {
 	doc.edit_by = $$("#profile").profile || {};
 
 	// create doc.id
-	doc._id = fdoc.path || '';
+	doc._id = fdoc.path || '/'; //default path is / root
 	doc._id += fdoc.title;
 
 	$$(this).app.db.saveDoc(doc, {

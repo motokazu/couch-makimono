@@ -1,12 +1,9 @@
 {{>header}}
 	<div id="itembox"></div>
 	<div id="edittab"></div>
-  </body>
   <script type="text/javascript" charset="utf-8">
     $.couch.app(function(app) {
       $("#account").evently("account", app);
-	  $("#profile").evently("profile", app);
-      $.evently.connect("#account","#profile", ["loggedIn","loggedOut"]);
 	  
 	  $("#itembox").evently("itembox", app);
 	  $("#navigator").evently("navigator", app);

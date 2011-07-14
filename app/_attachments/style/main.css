@@ -34,6 +34,14 @@ h1 {
 #topbar a:hover{
 	color: #FFF;
 }
+#footer{
+	width: 100%;
+	border-top: solid 1px #555;
+	font-size: 0.8em;
+	clear:both;
+	text-align: center;
+}
+
 #projectmenu {
 	background-color: #888;
 	color: #FFF;
@@ -79,7 +87,6 @@ h1 {
 }
 
 #itembox {
-	border:2px solid #dde;
 	background:8px;
 	padding:1px;
 	width:20%;
@@ -159,6 +166,8 @@ div.avatar img {
 
 #projectitems {
 	padding: 5px;
+	font-size: 0.8em;
+	border:1px solid #dde;
 }
 #projectitems > li {
 	list-style-type : none;

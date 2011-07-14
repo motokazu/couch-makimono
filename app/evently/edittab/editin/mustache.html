@@ -1,4 +1,3 @@
-<p class="projectname">project :: {{projectname}} opened.</p>
 <div id="edittabs">
 	<ul>
 		<li><a href="#tabs-0">Welcome</a> <span class="ui-icon ui-icon-close">Remove Tab</span></li>
@@ -13,7 +12,8 @@
 <script type="text/javascript" charset="utf-8">
 	var _tabs = $("#edittabs").tabs({
 		cache: true,
-		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>"
+		tabTemplate: "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close'>Remove Tab</span></li>",
+		spinner: "<img src='../img/ajaxloader.gif'>"
 	});
 	
 	$( "#edittabs span.ui-icon-close" ).live( "click", function() {
