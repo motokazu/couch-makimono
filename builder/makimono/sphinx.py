@@ -1,5 +1,14 @@
-''' Sphinx Helper library
-'''
+# -*- coding: utf-8 -*-
+"""
+
+     Makimono project sphinx helper library
+     ================================================================
+
+     :copyright: Copyright 2011 by Yohei Sasaki <yssk22@gmail.com>
+     :license: MIT license
+
+"""
+
 import sys, os
 from subprocess import Popen, PIPE
 
@@ -37,13 +46,9 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 epub:
 	$(SPHINXBUILD) -b epub $(ALLSPHINXOPTS) $(BUILDDIR)/epub
-	@echo
-	@echo "Build finished. The epub file is in $(BUILDDIR)/epub."
 
 """
 import os, sys
@@ -58,13 +63,17 @@ class Publisher(object):
         self._job_db = db
         self._job_doc = doc
         self._project_db = Database(uri = os.path.join(db.server_uri , doc['args']['database']))
-        self._root = os.path.join(workdir, doc['args']['database'], doc['_id'])
+        if doc['_id'][0] == '/':
+            self._root = os.path.join(workdir, doc['args']['database'], doc['_id'][1:])
+        else:
+            self._root = os.path.join(workdir, doc['args']['database'], doc['_id'])
 
     def publish(self):
         self._lock_job()
         try:
             self._deploy_fs()
-            self._build()
+            self._build('html')
+            self._build('epub')
             self._store_result()
             self._cleanup()
             self._mark_success()
@@ -134,17 +143,23 @@ class Publisher(object):
                     f.write(self._generate_conf(doc))
             elif t == 'item':
                 filepath = doc['_id']
+                if not util.is_valid_item_id(filepath):
+                    raise Exception('invalid _id')
                 # source
-                with open(os.path.join(source_dir, filepath), 'w') as f:
-                    f.write(doc['source'])
+                if filepath[0] == '/':
+                    filepath = os.path.join(source_dir, filepath[1:])
+                else:
+                    filepath = os.path.join(source_dir, filepath)
+                with open("%s.rst" % filepath, 'w') as f:
+                    f.write(doc['source'].encode('utf-8'))
                 # TODO: attachements
             else:
                 # unknown doc or design doc
                 pass
-            
-    def _build(self):
+
+    def _build(self, t):
         root = self._root
-        command = "make html"
+        command = "make %s" % t
         proc = Popen(command, shell = True, cwd = root, stdout = PIPE)
         stdout, stderr = proc.communicate()
         return (proc.returncode, stdout, stderr)

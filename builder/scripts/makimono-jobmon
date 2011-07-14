@@ -20,28 +20,28 @@
 import os, sys
 from optparse import OptionParser
 from couchdbkit import *
+from makimono import config
 from makimono.sphinx import Publisher
+from makimono.util import sync_app
 import json
 import traceback
-
-JOBMON_APPPATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '_design'))
-JOBMON_TIMEOUT = 60000
 
 parser = OptionParser()
 parser.add_option("-d", "--database", dest="database",
                   help="database url where job documents are stored",
-                  default="http://localhost:5984/makimono-jobs",
                   metavar="DATABASE")
 parser.add_option("-w", "--workdir",  dest="workdir",
                   help="directory path used for executing jobs",
-                  default="/tmp",
                   metavar="WORKDIR")
 (options, args) = parser.parse_args()
 
+if options.database:
+    config['database'] = options.database 
+if options.workdir:
+    config['workdir'] = options.workdir 
 
-db = Database(uri=options.database)
-designer.fs.pushapps(JOBMON_APPPATH, db)
-
+db = Database(uri=config['database'])
+sync_app(db)
 consumer = Consumer(db)
 def process_doc(line):
     if line.has_key('id'):
@@ -49,7 +49,7 @@ def process_doc(line):
             doc_id = line['id']
             # TODO multi-treaded.
             doc = db.get(doc_id)
-            publisher = Publisher(db, doc, workdir = options.workdir)
+            publisher = Publisher(db, doc, workdir = config['workdir'])
             publisher.publish()
         except:
             traceback.print_exc()
@@ -59,4 +59,4 @@ def process_doc(line):
 
 while True:
     consumer.wait(process_doc, feed="continuous", filter="jobmon/newjobs", 
-                  timeout=JOBMON_TIMEOUT)
+                  timeout= config['timeout'])
