@@ -54,14 +54,15 @@ epub:
 import os, sys
 import shutil
 from traceback import format_exception
-from makimono.util import datetime_str
+from makimono.util import datetime_str, is_valid_item_id
 from couchdbkit import Database
 from couchdbkit.designer.fs import FSDoc
 
 class Publisher(object):
-    def __init__(self, db, doc, workdir = '/tmp'):
+    def __init__(self, db, doc, workdir = '/tmp', templatedir = None ):
         self._job_db = db
         self._job_doc = doc
+        self._templatedir = templatedir
         self._project_db = Database(uri = os.path.join(db.server_uri , doc['args']['database']))
         if doc['_id'][0] == '/':
             self._root = os.path.join(workdir, doc['args']['database'], doc['_id'][1:])
@@ -143,7 +144,7 @@ class Publisher(object):
                     f.write(self._generate_conf(doc))
             elif t == 'item':
                 filepath = doc['_id']
-                if not util.is_valid_item_id(filepath):
+                if not is_valid_item_id(filepath):
                     raise Exception('invalid _id')
                 # source
                 if filepath[0] == '/':
@@ -167,6 +168,10 @@ class Publisher(object):
     def _store_result(self):
         root = self._root
         project_db = self._project_db
+        # Copy template files if exist
+        if self._templatedir:
+            if os.path.isdir(self._templatedir) == True:
+                shutil.copytree(self._templatedir, os.path.join(root, 'build/_attachments/f'))
         # TODO: maybe heavy bottlenecks, fix me for performance tu
         doc = FSDoc(os.path.join(root, 'build'), is_ddoc=False).doc(project_db)
         now = datetime_str()

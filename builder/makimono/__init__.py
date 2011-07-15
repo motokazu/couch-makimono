@@ -5,6 +5,7 @@ import json
 config = {
     'database': "http://localhost:5984/makimono-jobs",
     'workdir' : "/tmp",
+    'templatedir' : None,
     'timeout' : 60000
 }
 

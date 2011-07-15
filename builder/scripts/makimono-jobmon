@@ -11,10 +11,11 @@
      Usage
      ----------------------------------------------------------------
 
-     jobmon.py -d {DB_URL} -w {WORKDIR}
+     jobmon.py -d {DB_URL} -w {WORKDIR} -t {TEMPLATEDIR}
 
      - {DATABASE} : database url where job documents are stored.
      - {WORKDIR} : directory path used for executing jobs.
+     - {TEMPLATEDIR} : directory path of template files, which will be copied to workdir before publish.
 
 """
 import os, sys
@@ -33,12 +34,17 @@ parser.add_option("-d", "--database", dest="database",
 parser.add_option("-w", "--workdir",  dest="workdir",
                   help="directory path used for executing jobs",
                   metavar="WORKDIR")
+parser.add_option("-t", "--templatedir",  dest="templatedir",
+                  help="directory path of template files, which will be copied to workdir before publish.",
+                  metavar="TEMPLATEDIR")
 (options, args) = parser.parse_args()
 
 if options.database:
     config['database'] = options.database 
 if options.workdir:
     config['workdir'] = options.workdir 
+if options.templatedir:
+    config['templatedir'] = options.templatedir 
 
 db = Database(uri=config['database'])
 sync_app(db)
@@ -49,7 +55,7 @@ def process_doc(line):
             doc_id = line['id']
             # TODO multi-treaded.
             doc = db.get(doc_id)
-            publisher = Publisher(db, doc, workdir = config['workdir'])
+            publisher = Publisher(db, doc, workdir = config['workdir'], templatedir = config['templatedir'])
             publisher.publish()
         except:
             traceback.print_exc()
